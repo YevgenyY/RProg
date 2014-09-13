@@ -11,14 +11,13 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
   
   ## Return the mean of the pollutant across all monitors list
   ## in the 'id' vector (ignoring NA values)
-  
+ 
+  bigtable <- c()
   for (n in id) {
     ## print(paste(directory,sprintf("%03.0f.csv",n),sep="/")) 
     data <- read.csv(paste(directory,sprintf("%03.0f.csv",n),sep="/"));
-    bigtable <- 
-    
-
+    bigtable <- rbind(bigtable, data)
   }
     
-  mean(result)
+  mean(bigtable[, eval(pollutant)], na.rm=TRUE)
 }
